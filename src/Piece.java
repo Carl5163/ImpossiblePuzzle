@@ -6,6 +6,7 @@ public class Piece {
 	public int right;
 	public int down;
 	public int id;
+	int numRots; 
 	
 	
 	public Piece(int l, int u, int r, int d, int ids) {
@@ -14,9 +15,11 @@ public class Piece {
 		right = r;
 		down = d;
 		id = ids;
+		numRots = 0;
 	}
 	
 	public void rotate() {
+		numRots = (numRots+1) % 4;
 		int temp = up;
 		up = left;
 		left = down;
@@ -27,8 +30,11 @@ public class Piece {
 	
 	@Override
 	public String toString() {
-		return Integer.toString(id);
-		//return String.format("%d, %d, %d, %d", left, up, right, down);
+		return String.format("%d%d", id, numRots);
+	}
+	
+	public boolean equals(Piece other) {
+		return (id == other.id && numRots == other.numRots);
 	}
 
 }
